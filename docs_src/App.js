@@ -1,51 +1,53 @@
 import React from 'react'
-import Counter from './Counter'
+import axios from 'axios'
+import arrayShuffle from 'array-shuffle'
+import csvParse from 'csv-parse/lib/sync'
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
 
+    this.number = 0
+
     this.state = {
-      message: 'こんにちは！',
-      items: ['Alpha', 'Beta', 'Gamma'],
-      inputValue: '',
+      data: [],
+      cards: [],
     }
+
+    axios({
+      url: 'https://raw.githubusercontent.com/yassh/data/master/jaru.csv',
+    }).then((res) => {
+      const data = csvParse(res.data, { columns: true })
+      this.setState({ data })
+      this.drawCards()
+    }).catch((err) => {
+      console.error(err)
+    })
   }
 
-  onSubmit(e) {
-    e.preventDefault()
-    this.setState({ items: [...this.state.items, this.state.inputValue] })
-    this.setState({ inputValue: '' })
-  }
-
-  onInput(e) {
-    this.setState({ inputValue: e.target.value })
+  drawCards() {
+    const cards = arrayShuffle(this.state.data).slice(0, 5)
+    this.setState({ cards })
   }
 
   render() {
-    const { message, items, inputValue } = this.state
-    const onSubmit = (e) => { this.onSubmit(e) }
-    const onInput = (e) => { this.onInput(e) }
+    const { cards } = this.state
+    const drawCards = () => { this.drawCards() }
 
     return (
       <div>
-        <p>{ message }</p>
+        <button type="button" onClick={drawCards}>Draw cards</button>
 
-        <Counter />
-        <Counter step={10} />
+        { cards.map((card) => {
+          this.number += 1
 
-        <form onSubmit={onSubmit}>
-          <input type="text" onInput={onInput} value={inputValue} />
-          <input type="submit" value="Add" />
-        </form>
-
-        { items.length &&
-          <ul>
-            { items.map(item => (
-              <li>{ item }</li>
-            ))}
-          </ul>
-        }
+          return (
+            <details key={this.number}>
+              <summary>{ card.ja }</summary>
+              <p>{ card.ru }</p>
+            </details>
+          )
+        })}
       </div>
     )
   }
