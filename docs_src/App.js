@@ -1,7 +1,6 @@
 import React from 'react'
-import axios from 'axios'
 import arrayShuffle from 'array-shuffle'
-import csvParse from 'csv-parse/lib/sync'
+import Papa from 'papaparse'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -14,14 +13,17 @@ export default class App extends React.Component {
       cards: [],
     }
 
-    axios({
-      url: 'https://raw.githubusercontent.com/yassh/data/master/jaru.csv',
-    }).then((res) => {
-      const data = csvParse(res.data, { columns: true })
-      this.setState({ data })
-      this.drawCards()
-    }).catch((err) => {
-      console.error(err)
+    Papa.parse('https://raw.githubusercontent.com/yassh/data/master/jaru.csv', {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: (result) => {
+        this.setState({ data: result.data })
+        this.drawCards()
+      },
+      error: (err) => {
+        console.error(err)
+      },
     })
   }
 
