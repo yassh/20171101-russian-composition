@@ -1,0 +1,14 @@
+@import "./variables.css";
+
+.root {
+  border: solid 2px;
+  margin: var(--unit);
+  padding: var(--unit);
+}
+
+.message {
+  align-items: center;
+  color: var(--color);
+  display: flex;
+  justify-content: center;
+}

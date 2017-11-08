@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import style from './Counter.css'
 
 export default class Counter extends React.Component {
   constructor(props) {
@@ -26,7 +27,7 @@ export default class Counter extends React.Component {
     const increase = () => { this.increase() }
 
     return (
-      <div>
+      <div className={style.root}>
         <button type="button" onClick={decrease}>-{ step }</button>
         { count }
         <button type="button" onClick={increase}>+{ step }</button>

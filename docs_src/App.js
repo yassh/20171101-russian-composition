@@ -1,5 +1,6 @@
 import React from 'react'
 import Counter from './Counter'
+import style from './App.css'
 
 export default class App extends React.Component {
   constructor(props) {
@@ -28,8 +29,8 @@ export default class App extends React.Component {
     const onInput = (e) => { this.onInput(e) }
 
     return (
-      <div>
-        <p>{ message }</p>
+      <div className={style.root}>
+        <p className={style.message}>{ message }</p>
 
         <Counter />
         <Counter step={10} />
