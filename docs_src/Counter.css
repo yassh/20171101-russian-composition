@@ -1,0 +1,7 @@
+@import "./variables.css";
+
+.root {
+  border: dotted 1px;
+  margin: var(--unit);
+  padding: var(--unit);
+}
