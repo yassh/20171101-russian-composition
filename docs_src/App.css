@@ -1,14 +1,41 @@
-@import "./variables.css";
-
-.root {
-  border: solid 2px;
-  margin: var(--unit);
-  padding: var(--unit);
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  font: inherit;
+  margin: 0;
 }
 
-.message {
-  align-items: center;
-  color: var(--color);
-  display: flex;
-  justify-content: center;
+:root {
+  background-color: rgb(255, 255, 255);
+  background-image: url(https://raw.githubusercontent.com/yassh/a/master/subtlepatterns.com/retina_wood/retina_wood_%402X.png);
+  background-size: 512px;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+body {
+  padding: 20px;
+}
+
+.cardList {
+  margin-top: 20px;
+}
+
+.cardList-item:not(:first-child) {
+  margin-top: 20px;
+}
+
+.card {
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.15);
+  padding: 10px;
+}
+
+.card-content {
+  margin-left: 20px;
+  margin-top: 10px;
 }
