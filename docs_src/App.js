@@ -5,6 +5,15 @@ import './App.css'
 
 const MAX_CARDS = 8
 
+function speak(text) {
+  const ssu = new SpeechSynthesisUtterance()
+  ssu.text = text
+  ssu.lang = 'ru'
+  ssu.rate = 0.75
+
+  speechSynthesis.speak(ssu)
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -51,7 +60,10 @@ export default class App extends React.Component {
               <div className="cardList-item">
                 <details key={this.number} className="card">
                   <summary>{ card.ja }</summary>
-                  <p className="card-content">{ card.ru }</p>
+                  <p className="card-content">
+                    <span className="card-speakButton" onClick={() => { speak(card.ru) }}>🔈</span>
+                    { card.ru }
+                  </p>
                 </details>
               </div>
             )

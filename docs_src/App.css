@@ -36,6 +36,9 @@ body {
 }
 
 .card-content {
-  margin-left: 20px;
   margin-top: 10px;
+}
+
+.card-speakButton {
+  margin-right: 10px;
 }

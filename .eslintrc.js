@@ -16,5 +16,8 @@ module.exports = {
     'quote-props': [ERROR, 'consistent-as-needed'],
     'semi': [ERROR, 'never'],
     'react/jsx-filename-extension': OFF,
+    'jsx-a11y/accessible-emoji': OFF,
+    'jsx-a11y/click-events-have-key-events': OFF,
+    'jsx-a11y/no-static-element-interactions': OFF,
   },
 }
