@@ -57,8 +57,8 @@ export default class App extends React.Component {
             this.number += 1
 
             return (
-              <div className="cardList-item">
-                <details key={this.number} className="card">
+              <div key={this.number} className="cardList-item">
+                <details className="card">
                   <summary>{ card.ja }</summary>
                   <p className="card-content">
                     <span className="card-speakButton" onClick={() => { speak(card.ru) }}>🔈</span>
