@@ -14,6 +14,10 @@ function speak(text) {
   speechSynthesis.speak(ssu)
 }
 
+function removeAccent(str) {
+  return str.replace(/\u0301/g, '')
+}
+
 export default class App extends React.Component {
   constructor(props) {
     super(props)
@@ -44,13 +48,28 @@ export default class App extends React.Component {
     this.setState({ cards })
   }
 
+  searchCards(str) {
+    if (!str) {
+      this.drawCards()
+      return
+    }
+
+    const cards = this.state.data
+      .filter(card => card.ja.includes(str) || removeAccent(card.ru).includes(removeAccent(str)))
+      .slice(0, MAX_CARDS)
+
+    this.setState({ cards })
+  }
+
   render() {
     const { cards } = this.state
-    const drawCards = () => { this.drawCards() }
+    const handleClickDrawCards = () => { this.drawCards() }
+    const handleInputSearch = (e) => { this.searchCards(e.target.value) }
 
     return (
       <div>
-        <button type="button" onClick={drawCards}>Draw cards</button>
+        <button type="button" onClick={handleClickDrawCards}>Draw cards</button>
+        <input type="text" onInput={handleInputSearch} placeholder="Search" />
 
         <div className="cardList">
           { cards.map((card) => {
